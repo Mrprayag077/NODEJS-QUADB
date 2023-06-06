@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Data Table</title>
+    <style>
+        /* Add any custom CSS styles here */
+    </style>
+</head>
+
+<body>
+    <h1>Data Table</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Rank</th>
+                <th>Name</th>
+                <th>Last</th>
+                <th>Buy</th>
+                <th>Sell</th>
+                <th>Volume</th>
+                <th>Base Unit</th>
+                <th>Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% data.forEach(function(item,index) { %>
+                <tr>
+                    <td>
+                        <%= index + 1 %>
+                    </td>
+                    <td>
+                        <%= item.name %>
+                    </td>
+                    <td>
+                        <%= item.last %>
+                    </td>
+                    <td>
+                        <%= item.buy %>
+                    </td>
+                    <td>
+                        <%= item.sell %>
+                    </td>
+                    <td>
+                        <%= item.volume %>
+                    </td>
+                    <td>
+                        <%= item.base_unit %>
+                    </td>
+                    <td>
+                        <%= item.time %>
+                    </td>
+                </tr>
+                <% }); %>
+        </tbody>
+    </table>
+</body>
+
+</html>
