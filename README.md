@@ -1,16 +1,20 @@
 # NODEJS-QUADB
 
-TECHNOLOGIES:
-JS
+# TECHNOLOGIES:
+ JS
 NODEJS (backend server)
 HTML,CSS,EJS (front ed part)
 AJAX (to get data every 10 second from database without reloading webpage)
 POSTGRESQL (RAILWAY PLATFROM) 
 
 
-completed the assignment i was able to save data from API using AXIOS method and saved on POSTGRESQL database of Railway platfrom and using nodejs i am able to get the database data oin backend and display in front end using TEMPLATE ENGINE--EJS 
+I have completed the assignment. I was able to save data from an API using the Axios method and store it in a PostgreSQL database on the Railway platform. Additionally, I used Node.js as the backend server and HTML, CSS, and EJS for the frontend development. To fetch data from the database without reloading the webpage, I implemented AJAX, which retrieves data from the API every 10 seconds.
 
-I am also added a new feature using AJAX, i am fetching dats from API every 60 secs and using AJAX when users load the webpage, it trigers the GET METHOD 'localhost:3000/data' of NODEJS nad then NODEJS will send the response to AJAX and then we will get the values in fronend and using the AJA i was able to make the timer system, there's a 10 second timer, when it ends it will request the NODEJS GET METHOD '/data' using AJAX. so without reloading we will get the updated values from databse
+The PostgreSQL database on the Railway platform allowed me to retrieve the saved data on the backend using Node.js. With the help of the EJS template engine, I displayed the retrieved data on the frontend.
+
+As an added feature, I incorporated AJAX to update the data every 60 seconds. When the webpage loads, it triggers a GET request to the 'localhost:3000/data' endpoint in Node.js. The response from Node.js is sent to AJAX, allowing me to obtain the updated values on the frontend. By utilizing this AJAX functionality, I created a timer system that automatically refreshes the data every 10 seconds, eliminating the need for page reloading.
+
+Overall, I successfully implemented these functionalities and achieved the desired output.
 
 
 
