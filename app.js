@@ -84,83 +84,58 @@ async function storeTop10Results(results) {
     }
 }
 
-// const mutex = new Mutex();
-// let isFetchingData = false;
-
-// // Fetch and store data while ensuring only one operation is in progress at a time
-// async function fetchDataAndStore() {
-//     if (isFetchingData) {
-//         // A fetch and store operation is already in progress, so return early
-//         return;
-//     }
-
-//     const release = await mutex.acquire();
-//     try {
-//         isFetchingData = true;
-//         await createTable();
-//         const top10Results = await fetchTop10Results();
-//         await storeTop10Results(top10Results);
-//         console.log('Data fetched and stored successfully.');
-//     } catch (error) {
-//         console.error('An error occurred:', error);
-//         process.exit(1);
-//     } finally {
-//         isFetchingData = false;
-//         release();
-//     }
-// }
-
-// Create a route to fetch and store data before retrieving it
-// app.get('/data', async (req, res) => {
-//     try {
-//         await fetchDataAndStore();
-//         const client = await pool.connect();
-//         const query = 'SELECT * FROM ticker_data';
-//         const result = await client.query(query);
-//         const data = result.rows;
-//         client.release();
-//         res.render('index', { data: data });
-//     } catch (error) {
-//         console.error('Failed to retrieve data:', error);
-//         res.status(500).json({ error: 'Failed to retrieve data' });
-//     }
-// });
-
-
-// Set up a flag to track the fetch and store operation status
+const mutex = new Mutex();
 let isFetchingData = false;
 
-app.get('/data', async (req, res) => {
+// Fetch and store data while ensuring only one operation is in progress at a time
+async function fetchDataAndStore() {
+    if (isFetchingData) {
+        // A fetch and store operation is already in progress, so return early
+        return;
+    }
+
+    const release = await mutex.acquire();
     try {
-        if (isFetchingData) {
-            // A fetch and store operation is already in progress, so return a message indicating that
-            res.send('Data is currently being fetched and stored. Please try again later.');
-            return;
-        }
-
-        isFetchingData = true; // Set the flag to indicate that a fetch and store operation is in progress
-
-        // Perform the fetch and store operation
+        isFetchingData = true;
         await createTable();
         const top10Results = await fetchTop10Results();
         await storeTop10Results(top10Results);
         console.log('Data fetched and stored successfully.');
+    } catch (error) {
+        console.error('An error occurred:', error);
+        process.exit(1);
+    } finally {
+        isFetchingData = false;
+        release();
+    }
+}
 
-        // Retrieve the data from the database
+// Fetch and store data every 1 minute
+setInterval(fetchDataAndStore, 60000);
+
+
+// Create a route to retrieve data from the database
+// Create a route to retrieve data from the database
+app.get('/data', async (req, res) => {
+    try {
+        const release = await mutex.acquire(); // Acquire the mutex to prevent concurrent access
         const client = await pool.connect();
         const query = 'SELECT * FROM ticker_data';
         const result = await client.query(query);
         const data = result.rows;
+        console.log('----------------------------------------------------------------------------------');
+        // console.log(data);
+        console.log('----------------------------------------------------------------------------------');
         client.release();
+        release(); // Release the mutex after data retrieval is completed
 
-        isFetchingData = false; // Reset the flag after the operation is completed
-
-        res.render('index', { data: data });
+        res.json(data);
     } catch (error) {
-        console.error('An error occurred:', error);
+        console.error('Failed to retrieve data:', error);
         res.status(500).json({ error: 'Failed to retrieve data' });
     }
 });
+
 
 
 // Start the server
