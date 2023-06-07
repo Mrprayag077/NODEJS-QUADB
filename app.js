@@ -11,7 +11,7 @@ const port = 3000;
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
-// Create a PostgreSQL connection pool
+
 const pool = new Pool({
     connectionString: process.env.DATABASE_URL,
     ssl: {
@@ -19,7 +19,6 @@ const pool = new Pool({
     },
 });
 
-// Create the ticker_data table if it doesn't exist
 async function createTable() {
     try {
         const client = await pool.connect();
@@ -43,7 +42,6 @@ async function createTable() {
     }
 }
 
-// Fetch top 10 results from WazirX API
 async function fetchTop10Results() {
     try {
         const response = await axios.get('https://api.wazirx.com/api/v2/tickers');
@@ -87,10 +85,8 @@ async function storeTop10Results(results) {
 const mutex = new Mutex();
 let isFetchingData = false;
 
-// Fetch and store data while ensuring only one operation is in progress at a time
 async function fetchDataAndStore() {
     if (isFetchingData) {
-        // A fetch and store operation is already in progress, so return early
         return;
     }
 
@@ -114,8 +110,7 @@ async function fetchDataAndStore() {
 setInterval(fetchDataAndStore, 60000);
 
 
-// Create a route to retrieve data from the database
-// Create a route to retrieve data from the database
+
 app.get('/data', async (req, res) => {
     try {
         const release = await mutex.acquire(); // Acquire the mutex to prevent concurrent access

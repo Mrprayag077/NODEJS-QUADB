@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-right: 20%;
+        }
+
+        nav button {
+            margin-right: 10px;
+            /* Add margin if needed */
+        }
+
+        nav #app {
+            /* Adjust styles for the div as needed */
+        }
+
+
+        #logo {
+
+            padding-left: 10%;
+        }
+
+        body {
+            font-family: 'lato', sans-serif;
+            background-color: black;
+        }
+
+        .container {
+            max-width: 90%;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 10px;
+            padding-right: 10px;
+            align-items: center;
+            align-content: center;
+
+        }
+
+        h1 {
+            font-size: 28px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        h2 small {
+            font-size: 0.5em;
+        }
+
+        .responsive-table {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            margin-top: 6%;
+            align-items: center;
+            align-content: center;
+        }
+
+
+        .responsive-table li {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: #2e3242;
+            box-shadow: 0px 0px 9px 0px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            margin-bottom: 15px;
+            padding: 25px 30px;
+            color: #fff;
+            height: 2px;
+        }
+
+        .responsive-table .table-header {
+            opacity: 0.45;
+            font-size: 24px;
+            width: 90%;
+            text-transform: uppercase;
+            font-weight: 800;
+            letter-spacing: 1px;
+            margin: 0;
+            background-color: transparent;
+
+        }
+
+        .responsive-table .table-row {
+            background-color: #2e3242;
+            box-shadow: 0px 0px 9px 0px rgba(0, 0, 0, 0.1);
+            border-radius: 10px 0 0 10px;
+
+
+            border-radius: 10px;
+            padding: 25px 30px;
+            color: #fff;
+
+        }
+
+        .table-row .col {
+            color: #fff;
+            font-family: Oswald;
+            font-size: 24px;
+            font-weight: 800;
+            margin: 0;
+            opacity: 1;
+
+        }
+
+        .responsive-table .col {
+            flex-basis: 20%;
+        }
+
+
+        .responsive-table .col-1 {
+            flex-basis: 10%;
+        }
+
+        .responsive-table .col-2 {
+            flex-basis: 40%;
+        }
+
+        .responsive-table .col-3 {
+            flex-basis: 25%;
+        }
+
+        .responsive-table .col-4 {
+            flex-basis: 25%;
+        }
+
+        @media all and (max-width: 767px) {
+            .responsive-table .table-header {
+                display: none;
+            }
+
+            .responsive-table li {
+                display: block;
+            }
+
+            .responsive-table .col {
+                flex-basis: 100%;
+            }
+
+            .responsive-table .col {
+                display: flex;
+                padding: 10px 0;
+            }
+
+            .responsive-table .col:before {
+                color: #6c7a89;
+                padding-right: 10px;
+                content: attr(data-label);
+                flex-basis: 50%;
+                text-align: right;
+            }
+        }
+
+
+        .base-timer {
+            position: relative;
+            width: 70px;
+            height: 70px;
+        }
+
+        .base-timer__svg {
+            transform: scaleX(-1);
+        }
+
+        .base-timer__circle {
+            fill: none;
+            stroke: none;
+        }
+
+        .base-timer__path-elapsed {
+            stroke-width: 7px;
+            stroke: grey;
+        }
+
+        .base-timer__path-remaining {
+            stroke-width: 7px;
+            stroke-linecap: round;
+            transform: rotate(90deg);
+            transform-origin: center;
+            transition: 1s linear all;
+            fill-rule: nonzero;
+            stroke: currentColor;
+        }
+
+        .base-timer__path-remaining.green {
+            color: rgb(65, 184, 131);
+        }
+
+        .base-timer__path-remaining.orange {
+            color: orange;
+        }
+
+        .base-timer__path-remaining.red {
+            color: red;
+        }
+
+        .base-timer__label {
+            position: absolute;
+            width: 70px;
+            height: 70px;
+            top: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            color: #6ccacb;
+        }
+
+        #text {
+            color: #6ccacb;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <h1 id="logo" style="color:#6ccacb;">QUADB TECH <small>NODE JS PROFILE</small></h1>
+
+        <button id="nav-button">Button</button>
+        <div id="app"></div>
+        <!-- Add other navigation bar content here -->
+    </nav>
+    <div class="container">
+
+        <!-- <h2 style="color:#6ccacb;">Responsive Tables Using LI <small>Triggers on 767px</small></h2> -->
+        <ul class="responsive-table">
+
+            <li class="table-header">
+                <div class="col col-1">Job Id</div>
+                <div class="col col-2">Customer Name</div>
+                <div class="col col-3">Amount Due</div>
+                <div class="col col-4">Payment Status</div>
+            </li>
+
+            <li class="table-row">
+                <div class="col col-1" data-label="Job Id">42235</div>
+                <div class="col col-2" data-label="Customer Name">John Doe</div>
+                <div class="col col-3" data-label="Amount">$350</div>
+                <div class="col col-4" data-label="Payment Status">Pending</div>
+            </li>
+            <li class="table-row">
+                <div class="col col-1" data-label="Job Id">42442</div>
+                <div class="col col-2" data-label="Customer Name">Jennifer Smith</div>
+                <div class="col col-3" data-label="Amount">$220</div>
+                <div class="col col-4" data-label="Payment Status">Pending</div>
+            </li>
+            <li class="table-row">
+                <div class="col col-1" data-label="Job Id">42257</div>
+                <div class="col col-2" data-label="Customer Name">John Smith</div>
+                <div class="col col-3" data-label="Amount">$341</div>
+                <div class="col col-4" data-label="Payment Status">Pending</div>
+            </li>
+            <li class="table-row">
+                <div class="col col-1" data-label="Job Id">42311</div>
+                <div class="col col-2" data-label="Customer Name">John Carpenter</div>
+                <div class="col col-3" data-label="Amount">$115</div>
+                <div class="col col-4" data-label="Payment Status">Pending</div>
+            </li>
+
+        </ul>
+    </div>
+
+    <script>
+
+        pp();
+        const FULL_DASH_ARRAY = 283;
+        const WARNING_THRESHOLD = 10;
+        const ALERT_THRESHOLD = 5;
+
+        const COLOR_CODES = {
+            info: {
+                color: "green"
+            }
+        };
+
+        const TIME_LIMIT = 10;
+        let timePassed = 0;
+        let timeLeft = TIME_LIMIT;
+        let timerInterval = null;
+        let remainingPathColor = COLOR_CODES.info.color;
+
+        document.getElementById("app").innerHTML = `
+      <div class="base-timer">
+        <svg class="base-timer__svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <g class="base-timer__circle">
+            <circle class="base-timer__path-elapsed" cx="50" cy="50" r="45"></circle>
+            <path
+              id="base-timer-path-remaining"
+              stroke-dasharray="283"
+              class="base-timer__path-remaining ${remainingPathColor}"
+              d="
+                M 50, 50
+                m -45, 0
+                a 45,45 0 1,0 90,0
+                a 45,45 0 1,0 -90,0
+              "
+            ></path>
+          </g>
+        </svg>
+        <span id="base-timer-label" class="base-timer__label">${formatTime(
+            timeLeft
+        )}</span>
+      </div>
+    `;
+
+        startTimer();
+
+        function onTimesUp() {
+            clearInterval(timerInterval);
+            pp();
+        }
+
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                timePassed = timePassed += 1;
+                timeLeft = TIME_LIMIT - timePassed;
+                document.getElementById("base-timer-label").innerHTML = formatTime(
+                    timeLeft
+                );
+                setCircleDasharray();
+
+                if (timeLeft === 0) {
+                    onTimesUp();
+                }
+            }, 1000);
+        }
+
+        function formatTime(time) {
+            const minutes = Math.floor(time / 60);
+            let seconds = time % 60;
+
+            if (seconds < 10) {
+                seconds = `0${seconds}`;
+            }
+
+            return `${minutes}:${seconds}`;
+        }
+
+        function calculateTimeFraction() {
+            const rawTimeFraction = timeLeft / TIME_LIMIT;
+            return rawTimeFraction - (1 / TIME_LIMIT) * (1 - rawTimeFraction);
+        }
+
+        function setCircleDasharray() {
+            const circleDasharray = `${(
+                calculateTimeFraction() * FULL_DASH_ARRAY
+            ).toFixed(0)} 283`;
+            document
+                .getElementById("base-timer-path-remaining")
+                .setAttribute("stroke-dasharray", circleDasharray);
+        }
+
+        function pp() {
+            // Run AJAX request to retrieve data and update table values
+            const xhr = new XMLHttpRequest();
+            xhr.open("GET", "http://localhost:3000/data", true);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        const response = JSON.parse(xhr.responseText);
+                        console.log(response);
+                        updateTable(response);
+                        if (timeLeft === 0) {
+                            timePassed = 0;
+                            timeLeft = TIME_LIMIT;
+                            timerInterval = null;
+                            remainingPathColor = COLOR_CODES.info.color;
+                            startTimer();
+                        }
+                    } else {
+                        console.error("Failed to retrieve data:", xhr.status);
+                    }
+                }
+            };
+            xhr.send();
+        }
+
+        function updateTable(data) {
+            const tableBody = document.querySelector(".responsive-table");
+            tableBody.innerHTML = "";
+
+            const tableHeader = document.createElement("li");
+            tableHeader.classList.add("table-header");
+            const headerColumns = ["#", "name", "last", "buy", "sell", "volume", "base_unit"];
+            headerColumns.forEach((column) => {
+                const headerColumn = document.createElement("div");
+                headerColumn.classList.add("col");
+                headerColumn.textContent = column;
+                tableHeader.appendChild(headerColumn);
+            });
+
+            tableBody.appendChild(tableHeader);
+
+            data.forEach((item, index) => {
+                const tableRow = document.createElement("li");
+                tableRow.classList.add("table-row");
+
+                const rowColumns = [index + 1, item.name, item.last, item.buy, item.sell, item.volume, item.base_unit];
+
+
+                rowColumns.forEach((column) => {
+                    const rowColumn = document.createElement("div");
+                    rowColumn.classList.add("col");
+                    rowColumn.textContent = column;
+                    tableRow.appendChild(rowColumn);
+                });
+
+                tableBody.appendChild(tableRow);
+            });
+        }
+    </script>
+</body>
+
+</html>
