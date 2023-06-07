@@ -1,6 +1,6 @@
 # NODEJS-QUADB
 
-# TECHNOLOGIES:
+## TECHNOLOGIES:
  JS
 NODEJS (backend server)
 HTML,CSS,EJS (front ed part)
