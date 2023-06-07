@@ -7,7 +7,7 @@ HTML,CSS,EJS (front ed part)
 AJAX (to get data every 10 second from database without reloading webpage)
 POSTGRESQL (RAILWAY PLATFROM) 
 
-
+## SUMMARY
 I have completed the assignment. I was able to save data from an API using the Axios method and store it in a PostgreSQL database on the Railway platform. Additionally, I used Node.js as the backend server and HTML, CSS, and EJS for the frontend development. To fetch data from the database without reloading the webpage, I implemented AJAX, which retrieves data from the API every 10 seconds.
 
 The PostgreSQL database on the Railway platform allowed me to retrieve the saved data on the backend using Node.js. With the help of the EJS template engine, I displayed the retrieved data on the frontend.
@@ -18,7 +18,7 @@ Overall, I successfully implemented these functionalities and achieved the desir
 
 
 
-OUTPUT:
+## OUTPUT:
 
 
 ![Image Alt Text](https://github.com/Mrprayag077/NODEJS-QUADB/blob/main/1.png)
